@@ -151,9 +151,7 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
       case _: Empty => tweet
       case ne: NonEmpty => ne.mostRetweeted
     }
-    List(tweetLeft, tweetRight).foldLeft(tweet) { (z, t) =>
-      if (t.retweets > z.retweets) t else z
-    }
+    List(tweetLeft, tweetRight, tweet).maxBy(_.retweets)
   }
 
   def descendingByRetweet: TweetList = {
